@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Othello for screenreader</title>
+    <link href="vendor/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/twitter-bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href=".">Othello JS</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href=".">Home</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="main" class="container">
+      <div id="game-board" role="application">
+        <caption>Othello Gameboard</caption>
+      </div>
+      
+
+      <div id="options" class="container">
+        <div aria-label="focused out of gameboard" id="focus-out" tabindex="0">-</div>
+
+        <about>Othello is a game in which you try to fill the board with as many pieces of your color as possible.
+              Othello is played on a 8 by 8 grid and starts with two black and two white pieces crossing in the center.
+              This othello is modified to be entirely playable with the help of a screen reader.
+              
+        </about>
+
+        <div id="current-player">Current player: <span id="current-player-name">-</span></div>
+        <div id="message"></div>
+        <div id="console"></div>
+        <div id="stats"></div>
+        <div id="preference-pane">
+       
+        <div id="player-type-forms">
+          <label>
+            Black:
+            <select id="black-player-type">
+              <option value="human" selected>Human</option>
+              <option value="random">AI (Random)</option>
+              <option value="simpleCount-131072">AI (Type A; try to get many disks)</option>
+              <option value="basic-131072">AI (Type B; try to own corner positions)</option>
+              <option value="better-131072">AI (Type C; try to own corner positions carefully)</option>
+              <option value="moveCount-131072">AI (Type D; Prioritize number of moves)</option>
+              <option value="moveCountAndPositions-131072">AI (Type E; Prioritize number of moves and positions)</option>
+              <option value="mcts-128">AI (Type M-128; Monte Carlo Tree Search with 128 iterations)</option>
+              <option value="mcts-256">AI (Type M-256; Monte Carlo Tree Search with 256 iterations)</option>
+              <option value="mcts-512">AI (Type M-512; Monte Carlo Tree Search with 512 iterations)</option>
+              <option value="mcts-1024">AI (Type M-1024; Monte Carlo Tree Search with 1024 iterations)</option>
+            </select>
+          </label>
+          <label>
+            White:
+            <select id="white-player-type">
+              <option value="human">Human</option>
+              <option value="random" selected>AI (Random)</option>
+              <option value="simpleCount-131072">AI (try to get many disks)</option>
+              <option value="basic-131072">AI (try to own corner positions)</option>
+              <option value="better-131072">AI (try to own corner positions carefully)</option>
+              <option value="moveCount-131072">AI (Prioritize number of moves)</option>
+              <option value="moveCountAndPositions-131072">AI (Prioritize number of moves and positions)</option>
+              <option value="mcts-128">AI (Monte Carlo Tree Search with 128 iterations)</option>
+              <option value="mcts-256">AI (Monte Carlo Tree Search with 256 iterations)</option>
+              <option value="mcts-512">AI (Monte Carlo Tree Search with 512 iterations)</option>
+              <option value="mcts-1024">AI (Monte Carlo Tree Search with 1024 iterations)</option>
+          
+            </select>
+          </label>
+        </div>
+
+        <button id="swap-player-types-button" class="btn" type="button">⇅</button>
+       <!-- <div>
+          <input id="new-ai-url" type="text" value="http://kana.github.io/othello-js/random-ai.js">
+          <button id="add-new-ai-button" class="btn" type="button">Add new AI</button>
+          </div>
+        -->
+        <div>
+          <label>
+            <input id="repeat-games" type="checkbox">
+            Repeat games
+          </label>
+        </div>
+        <button id="start-button" class="btn btn-primary" type="submit">Start a new game</button>
+       <!-- <form id="play-method">
+          <label>
+            Mouse:
+            <input id="mouse-play-method" type="checkbox" checked="true" />
+          </label>
+          <label>
+            Keyboard:
+            <input id="keyboard-play-method" type="checkbox" />
+          </label>
+        </form>
+        -->
+        <!--gameboard size-->
+        
+        <div class="form-group">
+         <!-- <label for="board-size">Board Size Controller</label>
+          <div id="board-size-value" class="badge badge-primary float-right">30%</div>
+          <input type="range" id="board-size" class="custom-range" min="30" max="95" value="30" step="1">
+          //board size slider. app.js find with boardSizeValue.textContent = boardSize.value+"%";
+         -->
+          
+        <form id="gameboard-form">
+          <label>
+            Small
+            <input id="small-gameboard-button" type="checkbox" checked="true" />
+          </label>
+          <label>
+            Big
+            <input id="big-gameboard-button" type="checkbox" />
+          </label>
+        </form>
+
+        <!-- <button type="button" id="small-keyboard-button">Click Me!</button>
+          <button type="button" id="big-gameboard-button">Click Me!</button>
+          --> 
+        </div>
+
+        <!--stop-->
+
+
+        <!--speech synthesis-->
+<!--
+          <div>
+            <label>
+              Speech Synthesis:
+              <input id="text-to-speech" type="checkbox">
+            </label>
+            <button id="text-to-speech-options" class="invisible" >Text To Speech Options</button>
+
+            <div>  
+              <div class="form-group">
+              <label for="rate">Rate</label>
+              <div id="rate-value" class="badge badge-primary float-right">1</div>
+              <input type="range" id="rate" class="custom-range" min="0.5" max="2" value="1" step="0.1">
+            </div>
+            <div class="form-group">
+              <label for="pitch">Pitch</label>
+              <div id="pitch-value" class="badge badge-primary float-right">1</div>
+              <input type="range" id="pitch" class="custom-range" min="0" max="2" value="1" step="0.1">
+            </div>
+            <div class="form-group">
+              <select id="voice-select" class="form-control form-control-lg"></select>
+            </div>
+          </div>
+          </div>
+          -->
+          <!--stop-->
+
+        </div>
+      </div>
+    </div>
+
+    <script src="vendor/jquery/jquery-1.9.1.min.js"></script>
+    <script src="vendor/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <script src="othello.js"></script>
+
+    <script src="cookie.js"></script>
+    <!--<script src="speech.js"></script>-->
+    <script src="app.js"></script>
+    
+
+  </body>
+</html>

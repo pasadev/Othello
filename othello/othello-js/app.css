@@ -1,0 +1,178 @@
+#main.container
+{
+  text-align: center;
+}
+
+.disabled
+{
+  opacity: 0.5;
+}
+
+#message
+{
+  margin-top: 1em;
+}
+
+#preference-pane
+{
+  margin-top: 2em;
+}
+
+#player-type-forms
+{
+  display: inline-block;
+}
+#black-player-level,
+#white-player-level
+{
+  width: auto;
+}
+#swap-player-types-button
+{
+  position: relative;
+  top: -2em;
+}
+
+#add-new-ai-button
+{
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+#options {
+  position:relative;
+ 
+}
+
+#game-board {
+  margin:auto;
+  position: relative;
+  max-width:100vw;
+  height:400px;
+  width:400px;
+}
+
+#options {
+  margin:auto;
+  margin-top: 20px;
+  width: 350px;
+  display: block;
+}
+@media only screen and (max-width: 400px) {
+  #game-board {
+    height: 280px;
+    width: 280px;
+  }
+  #options {
+    margin:auto;
+    margin-top: 20px;
+    width: 300px;
+    display: block;
+  }
+  #swap-player-types-button
+{
+  display:block;
+  margin:auto;
+  margin-top: 2em;
+}
+}
+
+
+
+#game-board > #game-table
+{
+  position: absolute;
+  max-width: 100vw;
+  max-height: 100vw;
+  width: 100%;
+  height: 100%;
+  display:flex;
+
+  flex-direction: column;
+}
+
+#game-board  .game-tr{
+  height: 11.1%;
+  width: 100%;
+
+  display:flex;
+  flex-direction: row;
+}
+#game-board > #game-table .game-header
+{
+  margin: 0;
+  width: 11.1%;
+  height: 100%;
+}
+#game-board > #game-table .game-header-x
+{
+  margin: 0;
+  
+  padding-top: 5.5%;
+  vertical-align: middle;
+  width: 11.1%;
+  height: 100%;
+  box-sizing: border-box;
+}
+#game-board > #game-table .game-header-y
+{
+  margin: 0;
+  
+  text-align: right;
+  padding-top: 3%;
+  padding-right: 1%;
+  width: 11.1%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#game-board > #game-table .cell
+{
+  background: #090;
+  border: 1px solid #ccc;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  width:12.4%;
+  height: 100%;
+}
+#game-board > #game-table .cell.attackable
+{
+  cursor: pointer;
+}
+#game-board > #game-table .cell.attackable:hover
+{
+  background: #cc0;
+}
+
+#game-board > #game-table .cell.selected
+{
+  background: #cc0;
+}
+
+
+
+#game-board > #game-table .cell > .disc
+{
+  display: inline-block;
+  width: 70%;
+  height: 70%;
+  border-radius: 100%;
+  margin: 0.25em;
+}
+#game-board > #game-table .cell.white > .disc
+{
+  background: #fff;
+}
+#game-board > #game-table .cell.black > .disc
+{
+  background: #000;
+}
+#game-board > #game-table .cell.attackable > .disc
+{
+  opacity: 0.2;
+}
+#game-board > #game-table .cell.attackable:hover > .disc
+{
+  opacity: 1.0;
+}
